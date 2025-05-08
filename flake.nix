@@ -1,5 +1,5 @@
 {
-  description = "Jafner.net Flake";
+  description = "Joey's Dotfiles";
   inputs = {
     # Package repositories:
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
