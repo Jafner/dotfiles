@@ -34,7 +34,7 @@
   # User Programs
   programs.nh = {
     enable = true;
-    flake = "/home/joey/Git/Jafner.net";
+    flake = "/home/joey/Git/dotfiles";
   };
   chaotic.mesa-git = {
     enable = true;

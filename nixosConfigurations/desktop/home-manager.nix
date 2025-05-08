@@ -6,7 +6,6 @@
   home-manager = {
     users."${username}" = {
       home.packages = [
-        inputs.deploy-rs.packages."${system}".deploy-rs
         inputs.zen-browser.packages."${system}".default
       ];
     };
