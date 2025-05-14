@@ -1,0 +1,46 @@
+version: "3.8"
+
+services:
+  tdarr:
+    container_name: tdarr_server
+    image: ghcr.io/haveagitgat/tdarr
+    devices:
+      - "/dev/dri:/dev/dri"
+    volumes:
+      - "/mnt/recordings:/home/Tdarr/Media/Recordings"
+      - "/mnt/av:/home/Tdarr/Media/AV"
+      - "/data/appdata/tdarr/cache:/temp"
+      - "/data/appdata/tdarr/appdata:/app/server"
+      - "/data/appdata/tdarr/appdata:/app/configs"
+      - "/data/appdata/tdarr/appdata:/app/logs"
+    environment:
+      - serverIP=0.0.0.0
+      - webUIPort=8265
+      - serverPort=8266
+      - TZ=America/Los_Angeles
+      - PUID=1000
+      - PGID=1000
+      - UMASK_SET=002
+      - internalNode=true
+      - inContainer=true
+      - ffmpegVersion=7
+      - nodeName=internal
+    ports:
+      - "8265:8265"
+      - "8266:8266"
+    network_mode: bridge
+  # node:
+  #   container_name: tdarr_node
+  #   image: ghcr.io/haveagitgat/tdarr_node:latest
+  #   restart: unless-stopped
+  #   network_mode: service:tdarr
+  #   environment:
+  #     - serverIP=0.0.0.0
+  #     - serverPort=8266
+  #     - TZ=America/Los_Angeles
+  #     - PUID=1000
+  #     - PGID=1000
+  #     - UMASK_SET=002
+  #     - inContainer=true
+  #     - ffmpegVersion=7
+  #     - nodeName=external
