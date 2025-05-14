@@ -5,7 +5,14 @@
 , username
 , ...
 }: {
-  environment.systemPackages = with pkgs; [ catppuccin-sddm ];
+  environment.systemPackages = with pkgs; [
+    catppuccin-sddm
+    libnotify
+    lxqt.pavucontrol-qt
+  ];
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+  };
   programs.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${system}.hyprland;
@@ -15,33 +22,43 @@
     enable = true;
   };
   home-manager.users.${username} = {
+    home.packages = with pkgs; [
+      rose-pine-cursor
+      rose-pine-hyprcursor
+    ];
     wayland.windowManager.hyprland = {
       enable = true;
-      settings = lib.mkDefault {
-        "$mod" = "SUPER";
+      xwayland.enable = true;
+      systemd.enable = true;
+      plugins = [];
+      settings = {
+        env = [
+          "HYPRCURSOR_THEME,rose-pine-hyprcursor"
+        ];
+        source = [
+          "/home/${username}/.config/hypr/dynamic.conf"
+        ];
+        "$mainMod" = "SUPER";
         "$terminal" = "ghostty";
         "$fileManager" = "nnn";
+        "$editor" = "zeditor";
         "$menu" = "rofi -show drun";
+        "$confDynamic" = "/home/${username}/.config/hypr/dynamic.conf";
+        "$confStatic" = "/home/${username}/Git/dotfiles/nixosConfigurations/desktop-hyprland/default.nix"; # Change this when/if hyprland is merged to default desktop config.
         monitor = [
-          "Asus VG27A, 2560x1440@120,-2560x0,1"
-          "Asus ROG XG27AQM, 2560x1440@270,0x0,1,vrr,3"
-          "Dell S2716DG, 2560x1440@120,-2560x0,1"
+          "DP-1, 2560x1440@270,0x0,1,vrr,1"
+          "DP-3, 2560x1440@120,-2560x0,1"
+          "DP-2, 2560x1440@120,2560x0,1"
         ];
         exec-once = [
-          "waybar"
           "hyprpaper"
-        ];
-        permission = [
-          "/usr/(bin|local/bin)/grim, screencopy, allow"
-          "/usr/(lib|libexec|lib64)/xdg-desktop-portal-hyprland, screencopy, allow"
-          "/usr/(bin|local/bin)/hyprpm, plugin, allow"
         ];
         general = {
           gaps_in = 5;
           gaps_out = 20;
           border_size = 2;
-          col.active_border = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-          col.inactive_border = "rgba(595959aa)";
+          "col.active_border" = lib.mkDefault "rgba(33ccffee) rgba(00ff99ee) 45deg";
+          "col.inactive_border" = lib.mkDefault "rgba(595959aa)";
           resize_on_border = false;
           allow_tearing = false;
           layout = "dwindle";
@@ -55,7 +72,7 @@
             enabled = true;
             range = 4;
             render_power = 3;
-            color = "rgba(1a1a1aee)";
+            color = lib.mkDefault "rgba(1a1a1aee)";
           };
           blur = {
             enabled = true;
@@ -99,12 +116,12 @@
         master.new_status = "master";
         misc = {
           force_default_wallpaper = "-1";
-          disable_hyprland_logo = false;
+          disable_hyprland_logo = lib.mkForce false;
         };
         input = {
           kb_layout = "us";
-          follow_mouse = "1";
-          sensitivity = 0;
+          follow_mouse = 0;
+          sensitivity = -0.25;
         };
         gestures = {
           workspace_swipe = false;
@@ -118,10 +135,18 @@
           "$mainMod, R, exec, $menu"
           "$mainMod, P, pseudo,"
           "$mainMod, J, togglesplit,"
+          "ALT, Tab, cyclenext"
+          "ALT SHIFT, Tab, cyclenext, prev"
+          "$mainMod CTRL, F12, exec, $editor $confDynamic,"
+          "$mainMod CTRL SHIFT, F12, exec, $editor $confStatic,"
           "$mainMod, left, movefocus, l"
+          "$mainMod SHIFT, left, movewindow, l"
           "$mainMod, right, movefocus, r"
+          "$mainMod SHIFT, right, movewindow, r"
           "$mainMod, up, movefocus, u"
+          "$mainMod SHIFT, up, movewindow, u"
           "$mainMod, down, movefocus, d"
+          "$mainMod SHIFT, down, movewindow, d"
           "$mainMod, 1, workspace, 1"
           "$mainMod, 2, workspace, 2"
           "$mainMod, 3, workspace, 3"
@@ -151,6 +176,15 @@
           "$mainMod, mouse:272, movewindow"
           "$mainMod, mouse:273, resizewindow"
         ];
+        bindd = [
+          "$mainMod SHIFT CONTROL, F5, Rebuild NixOS and switch, exec, ghostty nh os switch"
+          "$mainMod, TAB, Open window selector, exec, rofi -show window"
+          "Alt_L, numpad0, Forward the Alt_L+Num0 hotkey to OBS Studio, pass, class:^(com\.obsproject\.Studio)$"
+        ];
+        windowrulev2 = [
+          "suppressevent maximize, class:.*"
+          "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
+        ];
       };
     };
     programs.waybar = {
@@ -160,7 +194,7 @@
       settings = {
         mainBar = {
           "layer" = "top"; # Waybar at top layer
-          "position" = "bottom"; # Waybar position (top| bottom | left | right)
+          "position" = "top"; # Waybar position (top| bottom | left | right)
           height = 30; # Waybar height (to be removed for auto height)
           # "width" = 1280; # Waybar width
           spacing = 4; # Gaps between module (4px)
@@ -174,7 +208,6 @@
           ];
           "modules-right" = [
             "mpd"
-            "idle_inhibitor"
             "pulseaudio"
             "network"
             "power-profiles-daemon"
@@ -205,8 +238,7 @@
             format = "<span style=\"italic\">{}</span>";
           };
           mpd = {
-            format = "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|
-        {queueLength}⸩ {volume}% ";
+            format = "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ";
             "format-disconnected" = "Disconnected ";
             "format-stopped" = "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ";
             "unknown-tag" = "N/A";
@@ -230,13 +262,6 @@
             };
             "tooltip-format" = "MPD (connected)";
             "tooltip-format-disconnected" = "MPD (disconnected)";
-          };
-          idle_inhibitor = {
-            format = "{icon}";
-            "format-icon" = {
-              activated = "";
-              deactivated = "";
-            };
           };
           tray = {
             # "icon-size" = 21;
@@ -341,5 +366,27 @@
         source = ./mediaplayer.py;
       };
     };
+    #home.pointerCursor = "";
   };
+  services = {
+    xserver = {
+      enable = true;
+      videoDrivers = [ "amdgpu" ];
+      excludePackages = [ pkgs.xterm ];
+      xkb.layout = "us";
+    };
+    displayManager.sddm.wayland.enable = true;
+  };
+  xdg.portal = {
+    enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      inputs.hyprland.packages.${system}.xdg-desktop-portal-hyprland
+    ];
+  };
+  systemd.services = {
+    "getty@tty1".enable = false;
+    "autovt@tty1".enable = false;
+  };
+  programs.kdeconnect.enable = true;
 }
