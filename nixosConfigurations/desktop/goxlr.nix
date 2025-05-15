@@ -6,6 +6,7 @@
   home-manager.users."${username}" = {
     home.packages = with pkgs; [ goxlr-utility ];
     systemd.user.services = {
+      # systemctl status --user goxlr-utility.service
       goxlr-utility = {
         Unit = {
           Description = "Unofficial GoXLR App replacement for Linux, Windows and MacOS";
