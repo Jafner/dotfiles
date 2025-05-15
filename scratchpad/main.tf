@@ -1,6 +1,3 @@
-# terraform
-# ^Brb9%10sS#OPNU%^Km@DTOwoF!nRxQy%Kc#Au_q!1^&T2%M1DR5G_
-# Scoring-Tremor-Dreamy1-Aroma-Stew-Scanning
 terraform {
   required_providers {
     aws = {
