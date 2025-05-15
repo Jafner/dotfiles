@@ -15,11 +15,10 @@
     programs.zed-editor = {
       # https://mynixos.com/home-manager/options/programs.zed-editor
       enable = true;
-      package = pkgs.zed-editor_git;
+      #package = pkgs.zed-editor_git;
       extensions = [
         "Nix"
         "Catppuccin"
-        "mcp-server-github"
       ];
       userSettings = {
         tab_size = 2;
