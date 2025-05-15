@@ -6,17 +6,17 @@
 }: {
   imports = [
     ./ai
-    ./bitwarden.nix
+    ./bitwarden
     ./default-applications.nix
     ./discord.nix
     ./docker.nix
     ./extrautils.nix
     ./filesystems.nix
+    ./filesync
     ./git.nix
     ./goxlr.nix
     ./hardware.nix
     ./home-manager.nix
-    #./hyprland
     ./iscsi-shares.nix
     ./keybase.nix
     ./mangohud.nix
@@ -27,8 +27,12 @@
     ./scripts.nix
     ./spotify.nix
     ./stylix.nix
+    #./wireguard.nix
     ./zed.nix
     ./zsh.nix
+  ] ++ [
+    ../../services/prometheus
+    ../../services/caddy
   ];
 
   # User Programs
@@ -194,7 +198,7 @@
   # - https://mynixos.com/nixpkgs/packages/linuxKernel.packages
   # - https://mynixos.com/nixpkgs/packages/linuxPackages
 
-  environment.etc."current-nixos".source = ../.;
+  environment.etc."current-nixos".source = ../../.;
   environment.systemPackages = with pkgs; [
     coreutils
     git
