@@ -13,8 +13,6 @@
     dataDir = "/var/lib/caddy";
     enableReload = true;
     acmeCA = "https://acme-staging-v02.api.letsencrypt.org/directory";
-    virtualHosts = {
-
-    };
+    virtualHosts = { };
   };
 }

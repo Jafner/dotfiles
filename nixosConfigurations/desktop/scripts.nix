@@ -1,26 +1,16 @@
 { pkgs
 , username
 , ...
-}: {
-  sops.secrets.zipline = {
-    sopsFile = ./secrets/zipline.token;
-    key = "";
+}:
+{
+  sops.secrets."zipline/auth_token" = {
+    sopsFile = ../../secrets/my.secrets.yml;
     mode = "0440";
-    format = "binary";
     owner = username;
   };
-  sops.secrets."cloudflare/id" = {
-    sopsFile = ./secrets/cloudflare_id.token;
-    key = "";
+  sops.secrets."cloudflare/stream" = {
+    sopsFile = ../../secrets/my.secrets.yml;
     mode = "0440";
-    format = "binary";
-    owner = username;
-  };
-  sops.secrets."cloudflare/token" = {
-    sopsFile = ./secrets/cloudflare_stream.token;
-    key = "";
-    mode = "0440";
-    format = "binary";
     owner = username;
   };
   home-manager.users."${username}" = {

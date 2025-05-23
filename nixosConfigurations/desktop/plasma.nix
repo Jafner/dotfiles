@@ -54,6 +54,7 @@
     kate
     okular
     discover
+    plasma-activities
   ];
 
   systemd.services = {

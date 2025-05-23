@@ -9,6 +9,7 @@
     ./bitwarden
     ./default-applications.nix
     ./discord.nix
+    ./direnv.nix
     ./docker.nix
     ./extrautils.nix
     ./filesystems.nix
@@ -27,6 +28,8 @@
     ./scripts.nix
     ./spotify.nix
     ./stylix.nix
+    ./tailscale.nix
+    ./terminal
     #./wireguard.nix
     ./zed.nix
     ./zsh.nix
@@ -96,12 +99,8 @@
         prismlauncher
         protonup-qt
       ];
-    programs.ghostty = {
-      enable = true;
-      enableZshIntegration = true;
-    };
     programs.home-manager.enable = true;
-    programs.kitty.enable = true;
+    programs.nnn.enable = true;
     programs.mpv = {
       enable = true;
       config = {
@@ -111,21 +110,6 @@
         volume = "50";
       };
     };
-    programs.tmux = {
-      enable = true;
-      newSession = true;
-      baseIndex = 1;
-      disableConfirmationPrompt = true;
-      mouse = true;
-      prefix = "C-b";
-      resizeAmount = 2;
-      plugins = with pkgs; [
-        { plugin = tmuxPlugins.resurrect; }
-        { plugin = tmuxPlugins.tmux-fzf; }
-      ];
-      shell = "${pkgs.zsh.shellPath}";
-    };
-    programs.nnn.enable = true;
     nixGL = {
       vulkan.enable = true;
       defaultWrapper = "mesa";

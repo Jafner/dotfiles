@@ -30,7 +30,7 @@
       enable = true;
       xwayland.enable = true;
       systemd.enable = true;
-      plugins = [];
+      plugins = [ ];
       settings = {
         env = [
           "HYPRCURSOR_THEME,rose-pine-hyprcursor"
@@ -121,7 +121,7 @@
         input = {
           kb_layout = "us";
           follow_mouse = 0;
-          sensitivity = -0.25;
+          force_no_accel = 1;
         };
         gestures = {
           workspace_swipe = false;
@@ -216,7 +216,6 @@
             "temperature"
             "clock"
             "tray"
-            "custom/power"
           ];
           "sway/workspace" = {
             "disable-scroll" = true;
@@ -272,9 +271,9 @@
             # };
           };
           clock = {
-            # "timezone" = "America/New_York";
+            "timezone" = "America/Los_Angeles";
             "tooltip-format" = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
-            format = "{:%Y-%m-%d}";
+            format = "{:%r}";
           };
           cpu = {
             format = "{usage}% ";
@@ -290,17 +289,6 @@
             # "format-critical" = "{temperatureC}°C {icon}";
             format = "{temperatureC}°C {icon}";
             "format-icon" = [ "" "" "" ];
-          };
-          "power-profiles-daemon" = {
-            format = "{icon}";
-            "tooltip-format" = "Power profile: {profile}\nDriver: {driver}";
-            tooltip = true;
-            "format-icon" = {
-              default = "";
-              performance = "";
-              balanced = "";
-              "power-saver" = "";
-            };
           };
           network = {
             # "interface" = "wlp2*"; # (Optional) To force the use of this interface

@@ -13,40 +13,40 @@
         modules = [ ./config.nix ];
       };
     in
-  {
-    defaultApp.${system} = self.apps.${system}.apply;
-    apps.${system} = {
-      apply = {
-        type = "app";
-        program = toString (pkgs.writers.writeBash "apply" ''
-          if [[ -e config.tf.json ]]; then rm -f config.tf.json; fi
-          cp ${terraformConfiguration} config.tf.json \
-            && ${terraform}/bin/terraform init \
-            && ${terraform}/bin/terraform apply
-        '');
+    {
+      defaultApp.${system} = self.apps.${system}.apply;
+      apps.${system} = {
+        apply = {
+          type = "app";
+          program = toString (pkgs.writers.writeBash "apply" ''
+            if [[ -e config.tf.json ]]; then rm -f config.tf.json; fi
+            cp ${terraformConfiguration} config.tf.json \
+              && ${terraform}/bin/terraform init \
+              && ${terraform}/bin/terraform apply
+          '');
+        };
+        plan = {
+          type = "app";
+          program = toString (pkgs.writers.writeBash "plan" ''
+            if [[ -e config.tf.json ]]; then rm -f config.tf.json; fi
+            cp ${terraformConfiguration} config.tf.json \
+              && ${terraform}/bin/terraform init \
+              && ${terraform}/bin/terraform plan
+          '');
+        };
+        destroy = {
+          type = "app";
+          program = toString (pkgs.writers.writeBash "destroy" ''
+            if [[ -e config.tf.json ]]; then rm -f config.tf.json; fi
+            cp ${terraformConfiguration} config.tf.json \
+              && ${terraform}/bin/terraform init \
+              && ${terraform}/bin/terraform destroy
+          '');
+        };
       };
-      plan = {
-        type = "app";
-        program = toString (pkgs.writers.writeBash "plan" ''
-          if [[ -e config.tf.json ]]; then rm -f config.tf.json; fi
-          cp ${terraformConfiguration} config.tf.json \
-            && ${terraform}/bin/terraform init \
-            && ${terraform}/bin/terraform plan
-        '');
-      };
-      destroy = {
-        type = "app";
-        program = toString (pkgs.writers.writeBash "destroy" ''
-          if [[ -e config.tf.json ]]; then rm -f config.tf.json; fi
-          cp ${terraformConfiguration} config.tf.json \
-            && ${terraform}/bin/terraform init \
-            && ${terraform}/bin/terraform destroy
-        '');
+      defaultPackage."${system}" = terranix.lib.terranixConfiguration {
+        system = "${system}";
+        modules = [ ./config.nix ];
       };
     };
-    defaultPackage."${system}" = terranix.lib.terranixConfiguration {
-      system = "${system}";
-      modules = [ ./config.nix ];
-    };
-  };
 }

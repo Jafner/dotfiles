@@ -2,15 +2,12 @@
 , username
 , ...
 }: {
-  sops.secrets."smb" = {
-    sopsFile = ./secrets/smb.secrets;
-    format = "binary";
-    key = "";
+  sops.secrets."truenas/smb" = {
+    sopsFile = ../../secrets/my.secrets.yml;
     mode = "0440";
     owner = username;
   };
   environment.systemPackages = with pkgs; [ cifs-utils ];
-
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/e29ec340-6231-4afe-91a8-aaa2da613282";
     fsType = "ext4";
@@ -27,9 +24,9 @@
     device = "/dev/disk/by-uuid/f023ae02-7742-4e13-a8ea-c1ea634436fa";
     fsType = "btrfs";
   };
-  fileSystems."av" = import ../../utils/mkMountSmbShare.nix "av";
+  #fileSystems."av" = import ../../utils/mkMountSmbShare.nix "av";
   fileSystems."torrenting" = import ../../utils/mkMountSmbShare.nix "torrenting";
-  fileSystems."recordings" = import ../../utils/mkMountSmbShare.nix "recordings";
+
   swapDevices = [{ device = "/dev/disk/by-uuid/73e8e737-1c5c-4ead-80c6-e616be538145"; }];
   # inputs.disko.nixosModules.disko
   # inputs.impermanence.nixosModules.impermanence

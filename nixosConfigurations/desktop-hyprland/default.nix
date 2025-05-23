@@ -7,12 +7,15 @@
   imports = [
     ../desktop/ai
     ../desktop/audio.nix
-    ../desktop/bitwarden.nix
+    ../desktop/bitwarden
     ../desktop/discord.nix
+    ../desktop/direnv.nix
     ../desktop/docker.nix
     ../desktop/extrautils.nix
     ../desktop/filesystems.nix
+    ../desktop/filesync
     ../desktop/git.nix
+    ../desktop/goxlr.nix
     ../desktop/graphics.nix
     ../desktop/hardware.nix
     ../desktop/home-manager.nix
@@ -23,8 +26,11 @@
     ../desktop/networking.nix
     ../desktop/obs-studio.nix
     ../desktop/ollama.nix
+    ../desktop/scripts.nix
+    ../desktop/secrets
     ../desktop/spotify.nix
     ./stylix.nix
+    ../desktop/terminal
     #../desktop/wireguard.nix
     ../desktop/zed.nix
     ../desktop/zsh.nix

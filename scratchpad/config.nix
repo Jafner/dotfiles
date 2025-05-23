@@ -25,16 +25,16 @@
   };
 
   data.aws_ami.nixos_arm64 = {
-    owners = ["427812963091"];
+    owners = [ "427812963091" ];
     most_recent = true;
     filter = [
       {
         name = "name";
-        values = ["nixos/24.11*"];
+        values = [ "nixos/24.11*" ];
       }
       {
         name = "architecture";
-        values = ["arm64"];
+        values = [ "arm64" ];
       }
     ];
   };
@@ -57,20 +57,20 @@
       from_port = 22;
       to_port = 22;
       protocol = "tcp";
-      cidr_blocks = ["0.0.0.0/0"];
+      cidr_blocks = [ "0.0.0.0/0" ];
     }];
     egress = [{
       from_port = 0;
       to_port = 0;
       protocol = "-1";
-      cidr_blocks = ["0.0.0.0/0"];
+      cidr_blocks = [ "0.0.0.0/0" ];
     }];
   };
 
   resource.aws_instance.main = {
     ami = config."data.aws_ami.nixos_arm64.id";
     instance_type = "t4g.nano";
-    vpc_security_group_ids = [config.resource.aws_security_group.ec2_sg.id];
+    vpc_security_group_ids = [ config.resource.aws_security_group.ec2_sg.id ];
     key_name = config.resource.aws_key_pair.terraform.key_name;
     tags.Name = "MainEC2Instance";
   };
