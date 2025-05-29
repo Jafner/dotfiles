@@ -25,7 +25,7 @@
     fsType = "btrfs";
   };
   #fileSystems."av" = import ../../utils/mkMountSmbShare.nix "av";
-  fileSystems."torrenting" = import ../../utils/mkMountSmbShare.nix "torrenting";
+  #fileSystems."torrenting" = import ../../utils/mkMountSmbShare.nix "torrenting";
 
   swapDevices = [{ device = "/dev/disk/by-uuid/73e8e737-1c5c-4ead-80c6-e616be538145"; }];
   # inputs.disko.nixosModules.disko

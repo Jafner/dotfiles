@@ -102,6 +102,10 @@ in
           fgColor = "b2bedc";
           bgColor = "1d253a";
         };
+        wine-PortalWars2 = mkMangohud {
+          fgColor = "231c44";
+          bgColor = "f9f6f0";
+        };
       };
     };
   };

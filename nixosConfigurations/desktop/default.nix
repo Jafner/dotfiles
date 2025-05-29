@@ -18,7 +18,7 @@
     ./goxlr.nix
     ./hardware.nix
     ./home-manager.nix
-    ./iscsi-shares.nix
+    #./iscsi-shares.nix
     ./keybase.nix
     ./mangohud.nix
     ./networking.nix
@@ -194,6 +194,7 @@
     btop
     vim
     tree
+    comma
   ];
 
   programs.nix-ld.enable = true;

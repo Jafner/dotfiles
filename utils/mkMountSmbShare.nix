@@ -13,7 +13,7 @@ name: {
     ]
     ++ [
       # Permissions options
-      "credentials=/run/secrets/smb"
+      "credentials=/run/secrets/truenas/smb"
       "uid=1000,forceuid"
       "gid=1000,forcegid"
     ];

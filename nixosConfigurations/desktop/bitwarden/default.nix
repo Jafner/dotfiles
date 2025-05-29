@@ -30,6 +30,7 @@
       settings = {
         base_url = "https://bitwarden.jafner.net";
         email = "jafner425@gmail.com";
+        lock_timeout = 172800; # 48 hours
         pinentry = pkgs.pinentry-qt;
       };
     };
@@ -50,8 +51,8 @@
 
         # Configure rbw
         eval "$(rbw gen-completions zsh)"
-        rbw unlock
-        rbw sync
+        #rbw unlock
+        #rbw sync
       '';
     };
   };

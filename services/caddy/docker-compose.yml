@@ -6,18 +6,27 @@ services:
     ports:
       - "80:80"
       - "443:443"
+      - "4433:4433"
     networks:
-      - reverse-proxy
+      - caddy
     environment:
-      - CADDY_INGRESS_NETWORKS=reverse-proxy
+      - CADDY_INGRESS_NETWORKS=caddy
     volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile
-      - caddy_data:/data
       - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      caddy.email: "joey@jafner.net"
+  nginx:
+    image: nginx
+    container_name: nginx
+    networks:
+      - caddy
+    labels:
+      caddy: test2.jafner.net:4433
+      caddy.tls: internal
+      caddy.reverse_proxy: "{{upstreams 80}}"
 
 networks:
-  reverse-proxy:
-    external: true
+  caddy:
+    name: caddy
 
-volumes:
-  caddy_data:
+
