@@ -2,17 +2,27 @@
 , pkgs
 , ...
 }: {
+  sops.secrets."openrouter/desktop" = {
+    sopsFile = ../../../secrets/my.secrets.yml;
+    mode = "0440";
+    owner = username;
+  };
   home-manager.users.${username} = {
     # Configure secrets-related parameters in the environment
     #   I wish aichat supported a more secure approach.
     #   See: https://github.com/sigoden/aichat/issues/802
     programs.zsh.envExtra = ''
-      export JINA_API_KEY=$(cat /home/${username}/.keys/jina/aichat)
+      OPENAI_API_KEY=$(cat /run/secrets/openrouter/desktop)
+      AICHAT_PLATFORM=openrouter
+      OPENROUTER_API_KEY=$OPENAI_API_KEY
     '';
     programs.zsh.shellAliases = {
       aichat = "AICHAT_PLATFORM=openrouter OPENROUTER_API_KEY=$(rbw get openrouter --field aichat) aichat";
     };
-    home.packages = with pkgs; [ repomix ];
+    home.packages = with pkgs; [
+      repomix
+      llm
+    ];
     home.file = {
       "aichat/config.yaml" = {
         source = ./config.yaml;

@@ -1,7 +1,7 @@
 # see https://github.com/sigoden/aichat/blob/main/config.example.yaml
 
 # LLM
-model: openrouter:deepseek/deepseek-r1:free # <client>:<model>
+model: openrouter:deepseek/deepseek-chat-v3-0528:free # <client>:<model>
 temperature: 0.6 # Set default temperature parameter, range (0, 1)
 top_p: 0.5 # Set default top-p parameter, with a range of (0, 1) or (0, 2) depending on the model
 
@@ -53,7 +53,7 @@ clients:
     api_base: https://openrouter.ai/api/v1
     # API Key from $OPENROUTER_API_KEY
     models:
-      - name: deepseek/deepseek-chat-v3-0324:free
+      - name: deepseek/deepseek-r1-0528:free
         max_input_tokens: 160000
         supports_vision: false
         supports_function_calling: false
