@@ -1,8 +1,9 @@
-{ pkgs
-, inputs
-, username
-, system
-, ...
+{
+  pkgs,
+  inputs,
+  username,
+  system,
+  ...
 }: {
   imports = [
     ./ai
@@ -18,7 +19,6 @@
     ./goxlr.nix
     ./hardware.nix
     ./home-manager.nix
-    #./iscsi-shares.nix
     ./keybase.nix
     ./mangohud.nix
     ./networking.nix
@@ -30,7 +30,6 @@
     ./stylix.nix
     ./tailscale.nix
     ./terminal
-    #./wireguard.nix
     ./zed.nix
     ./zsh.nix
   ];
@@ -110,7 +109,7 @@
     nixGL = {
       vulkan.enable = true;
       defaultWrapper = "mesa";
-      installScripts = [ "mesa" ];
+      installScripts = ["mesa"];
     };
     home = {
       enableNixpkgsReleaseCheck = false;
@@ -118,13 +117,13 @@
       username = "${username}";
       homeDirectory = "/home/${username}";
     };
-    xdg.systemDirs.data = [ "/usr/share" ];
+    xdg.systemDirs.data = ["/usr/share"];
     home.stateVersion = "24.11";
   };
 
   networking.firewall = {
-    allowedTCPPorts = [ 25565 ];
-    allowedUDPPorts = [ 25565 ];
+    allowedTCPPorts = [25565];
+    allowedUDPPorts = [25565];
   };
   nix.settings.download-buffer-size = 1073741824;
   nixpkgs = {
@@ -164,7 +163,7 @@
   ];
 
   sops = {
-    age.sshKeyPaths = [ "/home/${username}/.ssh/joey.desktop@jafner.net" ];
+    age.sshKeyPaths = ["/home/${username}/.ssh/joey.desktop@jafner.net"];
     age.generateKey = false;
   };
   services.libinput = {
@@ -222,10 +221,10 @@
         commands = [
           {
             command = "ALL";
-            options = [ "NOPASSWD" ];
+            options = ["NOPASSWD"];
           }
         ];
-        groups = [ "wheel" ];
+        groups = ["wheel"];
       }
     ];
   };
@@ -261,12 +260,12 @@
 
   networking.hostName = "desktop";
   networking.hosts = {
-    "192.168.1.1" = [ "wizard" ];
-    "192.168.1.12" = [ "paladin" ];
-    "192.168.1.23" = [ "fighter" ];
-    "192.168.1.135" = [ "desktop" ];
-    "143.198.68.202" = [ "artificer" ];
-    "172.245.108.219" = [ "champion" ];
+    "192.168.1.1" = ["wizard"];
+    "192.168.1.12" = ["paladin"];
+    "192.168.1.23" = ["fighter"];
+    "192.168.1.135" = ["desktop"];
+    "143.198.68.202" = ["artificer"];
+    "172.245.108.219" = ["champion"];
   };
 
   system.stateVersion = "24.11";
