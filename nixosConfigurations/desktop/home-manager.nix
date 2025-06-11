@@ -9,12 +9,12 @@
         inputs.zen-browser.packages."${system}".default
       ];
     };
-    backupFileExtension = "bk";
+    backupFileExtension = "bak";
     extraSpecialArgs = { inherit inputs; };
     sharedModules = [
-      inputs.stylix.homeManagerModules.stylix
+      inputs.stylix.homeModules.stylix
       inputs.chaotic.homeManagerModules.default
-      inputs.nixcord.homeManagerModules.nixcord
+      inputs.nixcord.homeModules.nixcord
     ];
   };
 }

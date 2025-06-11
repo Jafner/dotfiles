@@ -33,9 +33,6 @@
     #./wireguard.nix
     ./zed.nix
     ./zsh.nix
-  ] ++ [
-    ../../services/prometheus
-    ../../services/caddy
   ];
 
   # User Programs

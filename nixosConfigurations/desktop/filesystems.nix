@@ -1,12 +1,6 @@
 { pkgs
-, username
 , ...
 }: {
-  sops.secrets."truenas/smb" = {
-    sopsFile = ../../secrets/my.secrets.yml;
-    mode = "0440";
-    owner = username;
-  };
   environment.systemPackages = with pkgs; [ cifs-utils ];
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/e29ec340-6231-4afe-91a8-aaa2da613282";

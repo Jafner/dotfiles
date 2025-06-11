@@ -9,22 +9,22 @@
     mode = "0440";
     owner = username;
   };
-  sops.secrets."truenas/minio/desktop/access_key" = {
+  sops.secrets."paladin/versity/access_key" = {
     sopsFile = ../../../secrets/my.secrets.yml;
     mode = "0440";
     owner = username;
   };
-  sops.secrets."truenas/minio/desktop/secret_key" = {
+  sops.secrets."paladin/versity/secret_key" = {
     sopsFile = ../../../secrets/my.secrets.yml;
     mode = "0440";
     owner = username;
   };
-  sops.secrets."truenas/versity/desktop/access_key" = {
+  sops.secrets."barbarian/versity/access_key" = {
     sopsFile = ../../../secrets/my.secrets.yml;
     mode = "0440";
     owner = username;
   };
-  sops.secrets."truenas/versity/desktop/secret_key" = {
+  sops.secrets."barbarian/versity/secret_key" = {
     sopsFile = ../../../secrets/my.secrets.yml;
     mode = "0440";
     owner = username;
@@ -50,7 +50,19 @@
     programs.rclone = {
       enable = true;
       remotes = {
-        versity = {
+        paladin = {
+          config = {
+            type = "s3";
+            provider = "Other";
+            env_auth = "true";
+            endpoint = "https://192.168.1.12:30157";
+          };
+          secrets = {
+            access_key_id = "/run/secrets/paladin/versity/access_key";
+            secret_access_key = "/run/secrets/paladin/versity/secret_key";
+          };
+        };
+        barbarian = {
           config = {
             type = "s3";
             provider = "Other";
@@ -58,8 +70,8 @@
             endpoint = "https://192.168.1.10:30157";
           };
           secrets = {
-            access_key_id = "/run/secrets/truenas/minio/desktop/access_key";
-            secret_access_key = "/run/secrets/truenas/minio/desktop/secret_key";
+            access_key_id = "/run/secrets/barbarian/versity/access_key";
+            secret_access_key = "/run/secrets/barbarian/versity/secret_key";
           };
         };
         r2 = {
@@ -73,19 +85,6 @@
           secrets = {
             access_key_id = "/run/secrets/cloudflare/r2/access_key_id";
             secret_access_key = "/run/secrets/cloudflare/r2/secret_access_key";
-          };
-        };
-        minio = {
-          config = {
-            type = "s3";
-            provider = "Minio";
-            env_auth = "true";
-            region = "auto";
-            endpoint = "https://192.168.1.12:9000";
-          };
-          secrets = {
-            access_key_id = "/run/secrets/truenas/minio/desktop/access_key";
-            secret_access_key = "/run/secrets/truenas/minio/desktop/secret_key";
           };
         };
       };
