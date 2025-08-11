@@ -1,6 +1,7 @@
-{ username
-, pkgs
-, ...
+{
+  username,
+  pkgs,
+  ...
 }: {
   sops.secrets."bitwarden/client_id" = {
     sopsFile = ../../../secrets/my.secrets.yml;

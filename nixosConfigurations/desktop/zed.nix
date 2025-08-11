@@ -41,6 +41,9 @@
           "enable_language_server" = true;
           "format_on_save" = "on";
         };
+        languages."Markdown" = {
+          "format_on_save" = "on";
+        };
         theme = lib.mkDefault {
           mode = "system";
           dark = "Catppuccin Mocha";
@@ -124,6 +127,18 @@
                 "/local-directory:/local-directory"
                 "mcp/filesystem"
                 "/local-directory"
+              ];
+              "env" = {};
+            };
+            "settings" = {};
+          };
+          "nixos" = {
+            "command" = {
+              "path" = "nix";
+              "args" = [
+                "run"
+                "github:utensils/mcp-nixos"
+                "--"
               ];
               "env" = {};
             };

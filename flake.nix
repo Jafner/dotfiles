@@ -33,15 +33,15 @@
     catppuccin.url = "github:catppuccin/nix";
     ffaart.url = "github:Jafner/ffaart";
     nixcord.url = "github:KaylorBen/nixcord";
+    fancontrol-gui.url = "github:Maldela/fancontrol-gui";
   };
-  outputs = inputs @ { ... }: {
-    nixosConfigurations.desktop =
-      let
-        inherit inputs;
-        username = "joey";
-        hostname = "desktop";
-        system = "x86_64-linux";
-      in
+  outputs = inputs @ {...}: {
+    nixosConfigurations.desktop = let
+      inherit inputs;
+      username = "joey";
+      hostname = "desktop";
+      system = "x86_64-linux";
+    in
       inputs.nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit
@@ -58,13 +58,12 @@
           ./nixosConfigurations/desktop
         ];
       };
-    nixosConfigurations.desktop-hyprland =
-      let
-        inherit inputs;
-        username = "joey";
-        hostname = "desktop";
-        system = "x86_64-linux";
-      in
+    nixosConfigurations.desktop-hyprland = let
+      inherit inputs;
+      username = "joey";
+      hostname = "desktop";
+      system = "x86_64-linux";
+    in
       inputs.nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit

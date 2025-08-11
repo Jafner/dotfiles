@@ -12,6 +12,7 @@
     ./discord.nix
     ./direnv.nix
     ./docker.nix
+    ./email.nix
     ./extrautils.nix
     ./filesystems.nix
     ./filesync
@@ -28,7 +29,7 @@
     ./scripts.nix
     ./spotify.nix
     ./stylix.nix
-    ./tailscale.nix
+    #./tailscale.nix
     ./terminal
     ./zed.nix
     ./zsh.nix
@@ -83,16 +84,12 @@
         nvd
         libreoffice-qt6
         obsidian
-        protonmail-desktop
-        protonmail-bridge-gui
         losslesscut-bin
         aichat
         yek
         ffmpeg-full
       ]
       ++ [
-        # Purely gaming
-        prismlauncher
         protonup-qt
       ];
     programs.home-manager.enable = true;

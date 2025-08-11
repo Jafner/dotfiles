@@ -1,16 +1,19 @@
-{ inputs
-, username
-, system
-, ...
+{
+  inputs,
+  username,
+  system,
+  pkgs,
+  ...
 }: {
   home-manager = {
     users."${username}" = {
       home.packages = [
         inputs.zen-browser.packages."${system}".default
+        pkgs.godot
       ];
     };
     backupFileExtension = "bak";
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = {inherit inputs;};
     sharedModules = [
       inputs.stylix.homeModules.stylix
       inputs.chaotic.homeManagerModules.default

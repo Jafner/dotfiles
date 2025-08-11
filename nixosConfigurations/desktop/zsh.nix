@@ -1,14 +1,15 @@
-{ pkgs
-, username
-, ...
+{
+  pkgs,
+  username,
+  ...
 }: {
   users.users."${username}".shell = pkgs.zsh;
   programs.zsh.enable = true;
-  environment.pathsToLink = [ "/share/zsh" ];
+  environment.pathsToLink = ["/share/zsh"];
   home-manager.users."${username}" = {
     programs.zsh = {
       enable = true;
-      dotDir = ".config/zsh";
+      dotDir = "/home/${username}/.config/zsh";
       enableCompletion = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
@@ -106,18 +107,9 @@
         bindkey '^[w' kill-region # Delete
         bindkey '^I^I' autosuggest-accept # Tab, Tab
         bindkey '^[' autosuggest-clear # Esc
-        bindkey -s '^E' 'ssh $(cat ~/.ssh/profiles | fzf --multi)\n'
-        _fzf_compgen_path() {
-            fd --hidden --exclude .git . "$1"
-        }
-        _fzf_compgen_dir() {
-            fd --hidden --exclude .git . "$1"
-        }
-        eval "$(~/.nix-profile/bin/fzf --zsh)"
 
         fastfetch
       '';
-
     };
     home.packages = with pkgs; [
       zsh-completions
