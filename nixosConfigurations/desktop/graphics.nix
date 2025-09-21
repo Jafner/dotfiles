@@ -1,6 +1,4 @@
-{ username
-, ...
-}: {
+{username, ...}: {
   chaotic.mesa-git = {
     enable = true;
     fallbackSpecialisation = true;
@@ -17,7 +15,7 @@
     nixGL = {
       vulkan.enable = true;
       defaultWrapper = "mesa";
-      installScripts = [ "mesa" ];
+      installScripts = ["mesa"];
     };
   };
 }

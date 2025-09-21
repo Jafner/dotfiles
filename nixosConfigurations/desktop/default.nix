@@ -16,6 +16,7 @@
     ./extrautils.nix
     ./filesystems.nix
     ./filesync
+    ./graphics.nix
     ./git.nix
     ./goxlr.nix
     ./hardware.nix
@@ -40,20 +41,8 @@
     enable = true;
     flake = "/home/joey/Git/dotfiles";
   };
-  chaotic.mesa-git = {
-    enable = true;
-    fallbackSpecialisation = true;
-  };
   programs.chromium.enable = false;
   programs.steam.enable = true;
-  programs.gamescope = {
-    enable = true;
-    capSysNice = false;
-  };
-  programs.gamemode = {
-    enable = true;
-    enableRenice = true;
-  };
   home-manager.users."${username}" = {
     home.file.".ssh/config" = {
       enable = true;
@@ -102,11 +91,6 @@
         audio-device = "alsa/pipewire";
         volume = "50";
       };
-    };
-    nixGL = {
-      vulkan.enable = true;
-      defaultWrapper = "mesa";
-      installScripts = ["mesa"];
     };
     home = {
       enableNixpkgsReleaseCheck = false;
