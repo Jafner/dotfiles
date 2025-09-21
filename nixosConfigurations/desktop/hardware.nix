@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   boot.initrd.availableKernelModules = [
     "nvme"
     "xhci_pci"
@@ -9,7 +13,6 @@
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
   };
-  boot.kernelModules = ["amdgpu"];
   hardware.enableRedistributableFirmware = true;
   hardware.cpu.amd.updateMicrocode = true;
   hardware.graphics = {
@@ -18,6 +21,7 @@
   };
   hardware.xone.enable = true;
   hardware.steam-hardware.enable = true;
+  boot.kernelModules = ["amdgpu"];
   environment.systemPackages = with pkgs; [
     rocmPackages.rocm-smi
     rocmPackages.rocminfo
