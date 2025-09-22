@@ -1,6 +1,6 @@
 {username, ...}: {
   chaotic.mesa-git = {
-    enable = false;
+    enable = true;
     fallbackSpecialisation = true;
   };
   programs.gamemode = {
