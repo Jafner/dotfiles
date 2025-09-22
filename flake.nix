@@ -24,16 +24,16 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    disko = {
-      url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # disko = {
+    #   url = "github:nix-community/disko";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
     treefmt-nix.url = "github:numtide/treefmt-nix";
     pre-commit-hooks.url = "github:cachix/git-hooks.nix";
     catppuccin.url = "github:catppuccin/nix";
-    ffaart.url = "github:Jafner/ffaart";
+    # ffaart.url = "github:Jafner/ffaart";
     nixcord.url = "github:KaylorBen/nixcord";
-    fancontrol-gui.url = "github:Maldela/fancontrol-gui";
+    # fancontrol-gui.url = "github:Maldela/fancontrol-gui";
   };
   outputs = inputs @ {...}: {
     nixosConfigurations.desktop = let

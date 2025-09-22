@@ -5,43 +5,40 @@
   system,
   ...
 }: {
-  imports = [
-    ./ai
-    ./bitwarden
-    ./default-applications.nix
-    ./discord.nix
-    ./direnv.nix
-    ./docker.nix
-    ./email.nix
-    ./extrautils.nix
-    ./filesystems.nix
-    ./filesync
-    ./graphics.nix
-    ./git.nix
-    ./goxlr.nix
-    ./hardware.nix
-    ./home-manager.nix
-    ./keybase.nix
-    ./mangohud.nix
-    ./networking.nix
-    ./obs-studio.nix
-    ./ollama.nix
-    ./plasma.nix
-    ./scripts.nix
-    ./spotify.nix
-    ./stylix.nix
-    #./tailscale.nix
-    ./terminal
-    ./zed.nix
-    ./zsh.nix
-  ];
+  imports =
+    [
+      ./ai
+      ./bitwarden
+      ./filesync
+      ./terminal
+    ]
+    ++ [
+      ./default-applications.nix
+      ./discord.nix
+      ./extrautils.nix
+      ./filesystems.nix
+      ./git.nix
+      ./goxlr.nix
+      ./graphics.nix
+      ./hardware.nix
+      ./home-manager.nix
+      ./mangohud.nix
+      ./networking.nix
+      ./obs-studio.nix
+      ./plasma.nix
+      ./scripts.nix
+      ./spotify.nix
+      ./stylix.nix
+      ./zed.nix
+      ./zsh.nix
+    ];
 
   # User Programs
   programs.nh = {
     enable = true;
     flake = "/home/joey/Git/dotfiles";
   };
-  programs.chromium.enable = false;
+  programs.chromium.enable = true;
   programs.steam.enable = true;
   home-manager.users."${username}" = {
     home.file.".ssh/config" = {
@@ -65,22 +62,17 @@
       target = ".ssh/profiles";
     };
 
-    home.packages = with pkgs;
-      [
-        sops
-        age
-        ssh-to-age
-        nvd
-        libreoffice-qt6
-        obsidian
-        losslesscut-bin
-        aichat
-        yek
-        ffmpeg-full
-      ]
-      ++ [
-        protonup-qt
-      ];
+    home.packages = with pkgs; [
+      sops
+      age
+      ssh-to-age
+      nvd
+      libreoffice-qt6
+      obsidian
+      losslesscut-bin
+      ffmpeg-full
+      protonup-qt
+    ];
     programs.home-manager.enable = true;
     programs.nnn.enable = true;
     programs.mpv = {
@@ -128,11 +120,6 @@
     jack.enable = false;
   };
   services.pulseaudio.enable = false;
-
-  # Hardware, input devices
-  services.printing.enable = false;
-  hardware.wooting.enable = true;
-  hardware.xpadneo.enable = true;
 
   fonts.packages = with pkgs; [
     font-awesome

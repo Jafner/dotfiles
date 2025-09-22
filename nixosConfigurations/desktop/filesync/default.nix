@@ -1,4 +1,8 @@
-{ pkgs, username, ... }: {
+{
+  pkgs,
+  username,
+  ...
+}: {
   sops.secrets."cloudflare/r2/access_key_id" = {
     sopsFile = ../../../secrets/my.secrets.yml;
     mode = "0440";
@@ -43,37 +47,13 @@
     serviceConfig.User = "${username}";
   };
   home-manager.users.${username} = {
-    home.packages = with pkgs; [ rclone-browser restic ];
+    home.packages = with pkgs; [rclone-browser restic];
     programs.zsh.initContent = ''
       eval $(${pkgs.restic}/bin/restic generate --zsh-completion -)
     '';
     programs.rclone = {
       enable = true;
       remotes = {
-        paladin = {
-          config = {
-            type = "s3";
-            provider = "Other";
-            env_auth = "true";
-            endpoint = "https://192.168.1.12:30157";
-          };
-          secrets = {
-            access_key_id = "/run/secrets/paladin/versity/access_key";
-            secret_access_key = "/run/secrets/paladin/versity/secret_key";
-          };
-        };
-        barbarian = {
-          config = {
-            type = "s3";
-            provider = "Other";
-            env_auth = "true";
-            endpoint = "https://192.168.1.10:30157";
-          };
-          secrets = {
-            access_key_id = "/run/secrets/barbarian/versity/access_key";
-            secret_access_key = "/run/secrets/barbarian/versity/secret_key";
-          };
-        };
         r2 = {
           config = {
             type = "s3";
