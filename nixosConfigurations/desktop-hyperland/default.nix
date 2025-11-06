@@ -5,34 +5,26 @@
   system,
   ...
 }: {
-  imports =
-    [
-      ./ai
-      ./bitwarden
-      ./filesync
-    ]
-    ++ [
-      ./default-applications.nix
-      ./discord.nix
-      ./extrautils.nix
-      ./filesystems.nix
-      ./git.nix
-      ./goxlr.nix
-      ./graphics.nix
-      ./hardware.nix
-      ./home-manager.nix
-      ./mangohud.nix
-      ./networking.nix
-      ./obs-studio.nix
-      ./plasma.nix
-      ./scripts.nix
-      ./spotify.nix
-      ./stylix.nix
-      ./terminal.nix
-      ./zed.nix
-      ./zsh.nix
-    ];
-
+  imports = [
+    ./default-applications.nix
+    ./discord.nix
+    ./extrautils.nix
+    ./filesystems.nix
+    ./git.nix
+    ./goxlr.nix
+    ./graphics.nix
+    ./hardware.nix
+    ./home-manager.nix
+    ./mangohud.nix
+    ./networking.nix
+    ./obs-studio.nix
+    ./scripts.nix
+    ./spotify.nix
+    ./stylix.nix
+    ./terminal.nix
+    ./zed.nix
+    ./zsh.nix
+  ];
   # User Programs
   programs.nh = {
     enable = true;
@@ -125,7 +117,7 @@
     font-awesome
     noto-fonts
     noto-fonts-cjk-sans
-    noto-fonts-color-emoji
+    noto-fonts-emoji
     powerline-symbols
     nerd-fonts.symbols-only
   ];
