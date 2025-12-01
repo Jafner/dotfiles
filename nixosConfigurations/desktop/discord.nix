@@ -1,6 +1,4 @@
-{ username
-, ...
-}: {
+{username, ...}: {
   home-manager.users.${username} = {
     #home.packages = with pkgs; [ vesktop ];
     programs.nixcord = {
@@ -10,9 +8,9 @@
       config = {
         useQuickCss = false;
         frameless = true;
-        transparent = true;
-        themeLinks = [ "https://catppuccin.github.io/discord/dist/catppuccin-mocha.theme.css" ];
-        enabledThemes = [ ];
+        transparent = false;
+        themeLinks = ["https://catppuccin.github.io/discord/dist/catppuccin-mocha.theme.css"];
+        enabledThemes = [];
         plugins = {
           ignoreActivities = {
             enable = true;

@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{...}: {
   imports = [
     #./7900xtx.nix
     ./gtx980.nix
