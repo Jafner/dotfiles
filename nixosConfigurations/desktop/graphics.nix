@@ -8,7 +8,7 @@
     enableRenice = true;
   };
   home-manager.users.${username} = {
-    nixGL = {
+    targets.genericLinux.nixGL = {
       vulkan.enable = true;
       defaultWrapper = "mesa";
       installScripts = ["mesa"];

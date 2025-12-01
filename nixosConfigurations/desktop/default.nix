@@ -19,7 +19,7 @@
       ./git.nix
       ./goxlr.nix
       ./graphics.nix
-      ./hardware.nix
+      ./hardware
       ./home-manager.nix
       ./mangohud.nix
       ./networking.nix
@@ -38,7 +38,6 @@
     enable = true;
     flake = "/home/joey/Git/dotfiles";
   };
-  programs.chromium.enable = true;
   programs.steam.enable = true;
   home-manager.users."${username}" = {
     home.file.".ssh/config" = {

@@ -1,4 +1,8 @@
 {pkgs, ...}: {
+  imports = [
+    #./7900xtx.nix
+    ./gtx980.nix
+  ];
   boot.initrd.availableKernelModules = [
     "nvme"
     "xhci_pci"
@@ -20,14 +24,4 @@
   };
   hardware.xone.enable = true;
   hardware.steam-hardware.enable = true;
-  boot.kernelModules = ["amdgpu"];
-  environment.systemPackages = with pkgs; [
-    rocmPackages.rocm-smi
-    rocmPackages.rocminfo
-    amdgpu_top
-    #linuxKernel.packages.linux_6_16.xone
-  ];
-  environment.variables = {
-    AMD_VULKAN_ICD = "RADV";
-  };
 }
