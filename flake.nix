@@ -52,28 +52,6 @@
           ./nixosConfigurations/desktop
         ];
       };
-    nixosConfigurations.desktop-hyprland = let
-      inherit inputs;
-      username = "joey";
-      hostname = "desktop";
-      system = "x86_64-linux";
-    in
-      inputs.nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit
-            inputs
-            username
-            hostname
-            system
-            ;
-        };
-        modules = [
-          inputs.home-manager.nixosModules.home-manager
-          inputs.sops-nix.nixosModules.sops
-          inputs.chaotic.nixosModules.default
-          ./nixosConfigurations/desktop-hyprland
-        ];
-      };
     formatter.x86_64-linux =
       (inputs.treefmt-nix.lib.evalModule inputs.nixpkgs.legacyPackages.x86_64-linux {
         projectRootFile = "flake.nix";

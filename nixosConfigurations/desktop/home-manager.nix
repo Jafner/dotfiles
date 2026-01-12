@@ -10,7 +10,6 @@
       home.packages = [
         inputs.zen-browser.packages."${system}".default
         pkgs.godot
-        pkgs.chromium
       ];
     };
     backupFileExtension = "bak";

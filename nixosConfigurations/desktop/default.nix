@@ -1,14 +1,13 @@
 {
   pkgs,
-  inputs,
   username,
-  system,
   ...
 }: {
   imports =
     [
       ./ai
       ./bitwarden
+      ./desktop-environment
       ./filesync
     ]
     ++ [
@@ -18,13 +17,12 @@
       ./filesystems.nix
       ./git.nix
       ./goxlr.nix
-      ./graphics.nix
       ./hardware
       ./home-manager.nix
       ./mangohud.nix
       ./networking.nix
+      ./nix.nix
       ./obs-studio.nix
-      ./plasma.nix
       ./scripts.nix
       ./spotify.nix
       ./stylix.nix
@@ -32,13 +30,9 @@
       ./zed.nix
       ./zsh.nix
     ];
-
-  # User Programs
-  programs.nh = {
-    enable = true;
-    flake = "/home/joey/Git/dotfiles";
-  };
   programs.steam.enable = true;
+  # Command for Overwatch:
+  # PROTON_ENABLE_WAYLAND=1 __GL_SHADER_DISK_CACHE_SKIP_CLEANUP=1 LD_PRELOAD="" mangohud obs-gamecapture %command%
   home-manager.users."${username}" = {
     home.file.".ssh/config" = {
       enable = true;
@@ -93,23 +87,6 @@
     home.stateVersion = "24.11";
   };
 
-  networking.firewall = {
-    allowedTCPPorts = [25565];
-    allowedUDPPorts = [25565];
-  };
-  nix.settings.download-buffer-size = 1073741824;
-  nixpkgs = {
-    hostPlatform = system;
-    overlays = [
-      inputs.nixgl.overlay
-      inputs.chaotic.overlays.default
-    ];
-    config = {
-      allowUnfree = true;
-      allowUnfreePredicate = _: true;
-    };
-  };
-
   # Audio
   security.rtkit.enable = true;
   services.pipewire = {
@@ -139,7 +116,9 @@
     touchpad.naturalScrolling = true;
   };
 
-  boot.kernelPackages = pkgs.linuxPackages_cachyos;
+  #boot.kernelPackages = pkgs.linuxPackages_cachyos;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  #boot.kernelPackages = pkgs.linuxPackages;
   # Read more: https://wiki.nixos.org/wiki/Linux_kernel
   # Other options:
   # - https://mynixos.com/nixpkgs/packages/linuxKernel.packages
@@ -209,30 +188,6 @@
     LC_PAPER = "en_US.UTF-8";
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
-  };
-
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
-  nix.settings.trusted-users = [
-    "root"
-    "@wheel"
-  ];
-  nix.settings.auto-optimise-store = true;
-  nix.extraOptions = ''
-    accept-flake-config = true
-    warn-dirty = false
-  '';
-
-  networking.hostName = "desktop";
-  networking.hosts = {
-    "192.168.1.1" = ["wizard"];
-    "192.168.1.12" = ["paladin"];
-    "192.168.1.23" = ["fighter"];
-    "192.168.1.135" = ["desktop"];
-    "143.198.68.202" = ["artificer"];
-    "172.245.108.219" = ["champion"];
   };
 
   system.stateVersion = "24.11";

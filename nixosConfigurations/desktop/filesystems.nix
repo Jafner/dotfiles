@@ -20,7 +20,7 @@
   swapDevices = [{device = "/dev/disk/by-uuid/73e8e737-1c5c-4ead-80c6-e616be538145";}];
 
   fileSystems."/home/joey/stash" = {
-    enable = true;
+    enable = false;
     mountPoint = "/home/joey/stash";
     device = "//192.168.1.12/AV";
     fsType = "cifs";
@@ -32,7 +32,7 @@
     ];
   };
   fileSystems."/home/joey/torrenting" = {
-    enable = true;
+    enable = false;
     mountPoint = "/home/joey/torrenting";
     device = "//192.168.1.12/Torrenting";
     fsType = "cifs";
@@ -44,7 +44,7 @@
     ];
   };
   fileSystems."/home/joey/recordings" = {
-    enable = true;
+    enable = false;
     mountPoint = "/home/joey/recordings";
     device = "//192.168.1.12/Recordings";
     fsType = "cifs";
