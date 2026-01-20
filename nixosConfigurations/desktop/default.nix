@@ -20,6 +20,7 @@
       ./hardware
       ./home-manager.nix
       ./mangohud.nix
+      ./minecraft.nix
       ./networking.nix
       ./nix.nix
       ./obs-studio.nix

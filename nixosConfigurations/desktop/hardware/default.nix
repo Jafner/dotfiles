@@ -1,8 +1,8 @@
 {...}: {
   imports = [
-    #./7900xtx.nix
+    ./7900xtx.nix
     #./gtx980.nix
-    ./rtx3050.nix
+    #./rtx3050.nix
   ];
   boot.initrd.availableKernelModules = [
     "nvme"
