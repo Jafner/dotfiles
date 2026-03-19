@@ -12,10 +12,6 @@
   environment.variables = {
     AMD_VULKAN_ICD = "RADV";
   };
-  chaotic.mesa-git = {
-    enable = true;
-    fallbackSpecialisation = true;
-  };
   programs.gamemode = {
     enable = true;
     enableRenice = true;

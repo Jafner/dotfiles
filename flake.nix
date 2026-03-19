@@ -7,7 +7,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+    #chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     # Applications:
     hyprland = {
@@ -48,7 +48,6 @@
         modules = [
           inputs.home-manager.nixosModules.home-manager
           inputs.sops-nix.nixosModules.sops
-          inputs.chaotic.nixosModules.default
           ./nixosConfigurations/desktop
         ];
       };

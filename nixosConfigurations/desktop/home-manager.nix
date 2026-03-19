@@ -16,7 +16,6 @@
     extraSpecialArgs = {inherit inputs;};
     sharedModules = [
       inputs.stylix.homeModules.stylix
-      inputs.chaotic.homeManagerModules.default
       inputs.nixcord.homeModules.nixcord
     ];
   };

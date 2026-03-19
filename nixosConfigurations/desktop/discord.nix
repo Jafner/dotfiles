@@ -17,8 +17,8 @@
             ignorePlaying = true;
             ignoreWatching = true;
           };
-          betterFolders.enable = true;
-          betterUploadButton.enable = true;
+          betterFolders.enable = false;
+          betterUploadButton.enable = false;
         };
       };
     };

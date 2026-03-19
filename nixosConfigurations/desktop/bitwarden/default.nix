@@ -16,7 +16,6 @@
   home-manager.users.${username} = {
     home.packages = with pkgs; [
       rofi-rbw
-      bitwarden-desktop
       bitwarden-cli
     ];
     programs.rofi = {

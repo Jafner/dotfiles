@@ -32,6 +32,7 @@
       ./zsh.nix
     ];
   programs.steam.enable = true;
+  programs.kdeconnect.enable = true;
   # Command for Overwatch:
   # PROTON_ENABLE_WAYLAND=1 __GL_SHADER_DISK_CACHE_SKIP_CLEANUP=1 LD_PRELOAD="" mangohud obs-gamecapture %command%
   home-manager.users."${username}" = {
@@ -118,7 +119,8 @@
   };
 
   #boot.kernelPackages = pkgs.linuxPackages_cachyos;
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  #boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_zen;
   #boot.kernelPackages = pkgs.linuxPackages;
   # Read more: https://wiki.nixos.org/wiki/Linux_kernel
   # Other options:

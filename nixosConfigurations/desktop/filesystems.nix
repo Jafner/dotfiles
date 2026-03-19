@@ -22,7 +22,7 @@
   fileSystems."/home/joey/stash" = {
     enable = false;
     mountPoint = "/home/joey/stash";
-    device = "//192.168.1.12/AV";
+    device = "//192.168.0.46/AV";
     fsType = "cifs";
     options = [
       "vers=3"
@@ -34,7 +34,7 @@
   fileSystems."/home/joey/torrenting" = {
     enable = false;
     mountPoint = "/home/joey/torrenting";
-    device = "//192.168.1.12/Torrenting";
+    device = "//192.168.0.46/Torrenting";
     fsType = "cifs";
     options = [
       "vers=3"
@@ -46,7 +46,7 @@
   fileSystems."/home/joey/recordings" = {
     enable = false;
     mountPoint = "/home/joey/recordings";
-    device = "//192.168.1.12/Recordings";
+    device = "//192.168.0.46/Recordings";
     fsType = "cifs";
     options = [
       "vers=3"

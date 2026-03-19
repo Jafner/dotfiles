@@ -11,7 +11,6 @@
     hostPlatform = system;
     overlays = [
       inputs.nixgl.overlay
-      inputs.chaotic.overlays.default
     ];
     config = {
       allowUnfree = true;

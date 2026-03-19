@@ -94,7 +94,7 @@ in {
   home-manager.users.${username} = {
     programs.mangohud = {
       enable = true;
-      package = pkgs.mangohud_git;
+      package = pkgs.mangohud;
       settingsPerApplication = {
         wine-Overwatch = mkMangohudFrametimeGraph {
           fgColor = "b2bedc";

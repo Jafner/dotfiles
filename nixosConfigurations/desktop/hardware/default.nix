@@ -1,8 +1,8 @@
 {...}: {
   imports = [
-    #./7900xtx.nix
+    ./7900xtx.nix
     #./gtx980.nix
-    ./rtx3050.nix
+    #./rtx3050.nix
   ];
   boot.initrd.availableKernelModules = [
     "nvme"
@@ -16,7 +16,7 @@
   };
   services.printing.enable = false;
   hardware.wooting.enable = true;
-  hardware.xpadneo.enable = false;
+  hardware.xpadneo.enable = true;
   hardware.enableRedistributableFirmware = true;
   hardware.cpu.amd.updateMicrocode = true;
   hardware.graphics.enable = true;
