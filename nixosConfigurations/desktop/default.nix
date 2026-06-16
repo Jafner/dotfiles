@@ -30,6 +30,7 @@
       ./terminal.nix
       ./zed.nix
       ./zsh.nix
+      ./experimental-optimizations.nix
     ];
   programs.steam.enable = true;
   programs.kdeconnect.enable = true;
@@ -76,7 +77,7 @@
         autofit-larger = "100%x100%";
         hwdec = "yes";
         audio-device = "alsa/pipewire";
-        volume = "50";
+        volume = "30";
       };
     };
     home = {
