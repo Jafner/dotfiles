@@ -34,6 +34,7 @@
     ];
   programs.steam.enable = true;
   programs.kdeconnect.enable = true;
+  programs.appimage.enable = true;
   # Command for Overwatch:
   # PROTON_ENABLE_WAYLAND=1 __GL_SHADER_DISK_CACHE_SKIP_CLEANUP=1 LD_PRELOAD="" mangohud obs-gamecapture %command%
   home-manager.users."${username}" = {
